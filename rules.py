@@ -39,7 +39,7 @@ class Rules:
 		return False
 
 	# Compound nouns are taken together to form a composite concept
-	def C5(story):
+	def C4(story):
 		for token in story:
 			if token.dep_ == "compound":
 				return True
