@@ -37,16 +37,9 @@ class Rules:
 			if token.dep_ == "nsubj":
 				return True
 		return False
-
-	# Compound nouns are taken together to form a composite concept
-	def C4(story):
-		for token in story:
-			if token.dep_ == "compound":
-				return True
-		return False		
 		
 	# A gerund is a concept
-	def C5(story):
+	def C4(story):
 		for token in story:
 			# If gerund or present participle
 			if token.tag_ == "VBG":
@@ -57,6 +50,13 @@ class Rules:
 				for chunk in story.noun_chunks:
 					if token in chunk:
 						return True
+		return False
+		
+	# Compound nouns are taken together to form a composite concept
+	def C5(story):
+		for token in story:
+			if token.dep_ == "compound":
+				return True
 		return False
 
 	#########################################
