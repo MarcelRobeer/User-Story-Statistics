@@ -91,7 +91,7 @@ class Rules:
 	def R4(story):
 		for token in story:
 			# If token is a noun and not the last word of the sentence
-			if token.dep_ == 'poss' and token.head.pos_ == "NOUN"
+			if token.dep_ == 'poss' and token.head.pos_ == "NOUN":
 				return True
 		return False
 
