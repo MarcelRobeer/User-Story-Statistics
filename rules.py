@@ -187,34 +187,34 @@ class Rules:
 	### CARDINALITIES			            #
 	#########################################
 
-	# Singular noun -> Exactly 1
+	# Singular noun + definite article -> Exactly 1
 	def CA1(story):
 		for token in story:
 			if token.tag_ == 'NN' or token.tag_ == 'NNP':
 				return True
 		return False
-		
-	# More than X -> X..n
-	def CA2(story):
-		text_story = ' '.join([str.lower(t.text) for t in story])
-		if re.match('more than (.*?)', text_story) is not None:
-			return True
-		return False
-
-	# The words Many/each/all/every/some/any -> ??..n
-	def CA3(story):
-		signals = ['many', 'each', 'all', 'every', 'some', 'any']
-		for token in story:
-			if str.lower(token.text) in signals:
-				return True
-		return False
 
 	# Indefinite article -> Exactly 1
-	def CA4(story):
+	def CA2(story):
 		signals = ['a', 'an']
 		for token in story:
 			# If indefinite article AND it is not part of the role indicator 'as a'/'as an'
 			if str.lower(token.text) in signals:
 				if str.lower(token.nbor(-1).text) != 'as':
 					return True
+		return False
+		
+	# More than X -> X..n
+	def CA3(story):
+		text_story = ' '.join([str.lower(t.text) for t in story])
+		if re.match('more than (.*?)', text_story) is not None:
+			return True
+		return False
+
+	# The words Many/each/all/every/some/any -> ??..n
+	def CA4(story):
+		signals = ['many', 'each', 'all', 'every', 'some', 'any']
+		for token in story:
+			if str.lower(token.text) in signals:
+				return True
 		return False
